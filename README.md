@@ -18,5 +18,3 @@
     <li>Use date filters to analyze daily outputs and payments.</li>
   </ul>
 
-  <h2>Contact</h2>
-  <p>If you have any questions or need further assistance, please contact the project maintainer.</p>
