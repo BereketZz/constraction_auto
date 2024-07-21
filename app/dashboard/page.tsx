@@ -113,12 +113,10 @@ const Manage: React.FC = () => {
           <DataGrid
             rows={jobs}
             columns={columns}
-            pageSize={pageSize}
-            onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-            rowsPerPageOptions={[5, 10, 20]}
-            pagination
-            components={{ Toolbar: CustomToolbar }}
-            disableSelectionOnClick
+            initialState={{
+              pagination: { paginationModel: { pageSize: 5 } },
+            }}
+            pageSizeOptions={[5, 25, 50]}
             className="bg-white"
           />
         </div>
