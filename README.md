@@ -1,36 +1,22 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1>Construction Management</h1>
+  <p>Welcome to the Construction Management project. This application provides a comprehensive dashboard for managing construction projects, including user authentication, data analysis, and job tracking.</p>
 
-## Getting Started
+  <h2>Getting Started</h2>
+  <p>To get started with the project, follow these steps:</p>
+  <ol>
+    <li>Clone the repository.</li>
+    <li>Install the dependencies using <code>npm install</code>.</li>
+    <li>Set up Firebase authentication and Firestore database.</li>
+    <li>Run the development server with <code>npm run dev</code>.</li>
+  </ol>
 
-First, run the development server:
+  <h2>Usage</h2>
+  <p>After setting up the project, you can use the dashboard to:</p>
+  <ul>
+    <li>Log in and log out securely.</li>
+    <li>Track job details and view analytics.</li>
+    <li>Use date filters to analyze daily outputs and payments.</li>
+  </ul>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+  <h2>Contact</h2>
+  <p>If you have any questions or need further assistance, please contact the project maintainer.</p>
