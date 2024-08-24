@@ -33,10 +33,12 @@ const Login: React.FC = () => {
     try {
       setCheck(true);
       await signInWithEmailAndPassword(auth, email, password);
-      if(email=="danny@gmail.com"){
+      if(email==="danny@gmail.com"){
         router.push("/dashboard");
-      }else{
+      }else if(email==="collector@gmail.com"){
         router.push("/form")
+      }else{
+        toast.error("Incorrect username or password!")
       }
    
     } catch (err: any) {
