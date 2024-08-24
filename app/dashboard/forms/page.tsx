@@ -4,7 +4,6 @@ import { db } from "../../../firebase";
 import { v4 as uuid } from "uuid";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import DefaultLayout from "@/components/DeafultLayout";
 import {
   updateDoc,
   onSnapshot,
@@ -18,7 +17,8 @@ interface FormState {
   jobDescription: string;
   name: string;
   profession: string;
-  numberOfAssistants: string;
+  numberOfMaleAssistants: string;
+  numberOfFemaleAssistants: string;
   measuredOutputPerDay: string;
   unitOfMeasurement: string;
   expectedOutput: string;
@@ -28,9 +28,9 @@ interface FormState {
 
 const professions = [
   "Labor",
-  "Site Engineer",
+  "Bar bender",
   "Foreman",
-  "Architect",
+  "Welder",
   "Electrician",
   "Plumber",
   "Carpenter",
@@ -42,7 +42,8 @@ const JobForm: React.FC = () => {
     jobDescription: "",
     name: "",
     profession: "",
-    numberOfAssistants: "",
+    numberOfMaleAssistants: "",
+    numberOfFemaleAssistants:"",
     measuredOutputPerDay: "",
     unitOfMeasurement: "",
     expectedOutput: "",
@@ -50,7 +51,25 @@ const JobForm: React.FC = () => {
     dailyPaymentAssistant: "",
   });
   const [check, setCheck] = useState(false);
-
+  const [names, setNames] = useState<string[]>([]);
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const addName = () => {
+    if (formData.name) {
+      setNames([...names, formData.name]);
+      setFormData({ ...formData, name: "" }); // Clear the name field after adding
+    }
+  };
+  const removeName = (index: number) => {
+    const updatedNames = names.filter((_, i) => i !== index);
+    setNames(updatedNames);
+  };
+    
+ 
   const handleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -71,9 +90,10 @@ const JobForm: React.FC = () => {
         job: arrayUnion({
           id: uuid(),
           jobDescription: formData.jobDescription,
-          name: formData.name,
+          name: names, 
           profession: formData.profession,
-          numberOfAssistants: formData.numberOfAssistants,
+          numberOfMaleAssistants: formData.numberOfMaleAssistants,
+          numberOfFemaleAssistants: formData.numberOfFemaleAssistants,
           measuredOutputPerDay: formData.measuredOutputPerDay,
           unitOfMeasurement: formData.unitOfMeasurement,
           expectedOutput: formData.expectedOutput,
@@ -91,10 +111,6 @@ const JobForm: React.FC = () => {
   };
 
   return (
-    <DefaultLayout>
-
-
- 
     <section className="bg-gray-50 min-ha-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full bg-white p-8 shadow-md rounded-lg">
         <h2 className="mb-6 text-center text-3xl font-extrabold text-gray-900">
@@ -119,22 +135,50 @@ const JobForm: React.FC = () => {
             />
           </div>
           <div>
-            <label
-              htmlFor="name"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Name
-            </label>
-            <input
-              type="text"
-              name="name"
-              id="name"
-              value={formData.name}
-              onChange={handleChange}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-black"
-              required
-            />
-          </div>
+  <label
+    htmlFor="name"
+    className="block text-sm font-medium text-gray-700"
+  >
+    Name(s)
+  </label>
+  <div className="flex gap-2 ">
+  <input
+    type="text"
+    name="name"
+    id="name"
+    value={formData.name}
+    onChange={handleNameChange}
+    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-black"
+    required
+  />
+  <button
+    type="button"
+    onClick={addName}
+    className="mt-1 px-3 py-2 bg-indigo-500 text-white rounded-md shadow-sm"
+  >
+    Add
+  </button>
+  </div>
+</div>
+
+<div className="mt-4">
+  {names.map((name, index) => (
+    <div
+      key={index}
+      className="inline-flex items-center px-3 py-1 mr-2 mb-2 bg-gray-200 rounded-full text-sm font-medium text-gray-700"
+    >
+      {name}
+      <button
+        type="button"
+        onClick={() => removeName(index)}
+        className="ml-2 text-red-500 hover:text-red-700"
+      >
+        ×
+      </button>
+    </div>
+  ))}
+</div>
+
           <div>
             <label
               htmlFor="profession"
@@ -163,13 +207,30 @@ const JobForm: React.FC = () => {
               htmlFor="numberOfAssistants"
               className="block text-sm font-medium text-gray-700"
             >
-              Number of Assistants
+              Number of Male Assistants
             </label>
             <input
               type="text"
               name="numberOfAssistants"
               id="numberOfAssistants"
-              value={formData.numberOfAssistants}
+              value={formData.numberOfMaleAssistants}
+              onChange={handleChange}
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-black"
+              required
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="numberOfAssistants"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Number of Female Assistants
+            </label>
+            <input
+              type="text"
+              name="numberOfAssistants"
+              id="numberOfAssistants"
+              value={formData.numberOfFemaleAssistants}
               onChange={handleChange}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-black"
               required
@@ -308,7 +369,6 @@ const JobForm: React.FC = () => {
         theme="light"
       />
     </section>
-    </DefaultLayout>
   );
 };
 
