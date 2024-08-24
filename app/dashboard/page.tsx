@@ -51,6 +51,7 @@ const Manage: React.FC = () => {
           toast.error("No such document!");
         }
       } catch (error) {
+        console.log(error)
         toast.error("Error fetching data");
       }
     };
